@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:peliculasapp/Movies/blocs/movies_bloc.dart';
 import 'package:peliculasapp/Movies/blocs/populares_bloc.dart';
 import 'package:peliculasapp/Movies/models/movie_model.dart';
+import 'package:peliculasapp/Search/search_delegate.dart';
 import 'package:peliculasapp/Widgets/movie_horizontal_widget.dart';
 import 'package:peliculasapp/Widgets/swiper_card_widget.dart';
 
@@ -12,11 +13,16 @@ class MovieListPage extends StatelessWidget {
         appBar: AppBar(
           title: Text('Peliculas App'),
           backgroundColor: Colors.indigoAccent,
-          actions: [IconButton(icon: Icon(Icons.search), onPressed: () {})],
+          actions: [
+            IconButton(
+                icon: Icon(Icons.search),
+                onPressed: () {
+                  showSearch(context: context, delegate: DataSearch());
+                })
+          ],
         ),
         body: Container(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [_moviesInCatelera(), _popularsMovies(context)],
           ),
         ));
@@ -42,6 +48,7 @@ class MovieListPage extends StatelessWidget {
   Widget _popularsMovies(BuildContext context) {
     popularsBlock.fetchPopularsMovies();
     return Container(
+      margin: EdgeInsets.only(top: 10),
       width: double.infinity,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

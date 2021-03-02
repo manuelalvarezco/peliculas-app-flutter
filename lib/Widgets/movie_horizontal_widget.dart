@@ -33,17 +33,27 @@ class MovieHorizontalWidget extends StatelessWidget {
   }
 
   Widget _tarjeta(BuildContext context, Movie movie) {
-    return Container(
+    final tarjeta = Container(
       margin: EdgeInsets.only(right: 15.0),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(20.0),
-        child: FadeInImage(
-          image: NetworkImage(movie.getPosterImg()),
-          placeholder: AssetImage('assets/jar-loading.gif'),
-          fit: BoxFit.cover,
-          height: 160.0,
+      child: Hero(
+        tag: movie.id,
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(20.0),
+          child: FadeInImage(
+            image: NetworkImage(movie.getPosterImg()),
+            placeholder: AssetImage('assets/jar-loading.gif'),
+            fit: BoxFit.cover,
+            height: 160.0,
+          ),
         ),
       ),
+    );
+
+    return GestureDetector(
+      onTap: () {
+        Navigator.pushNamed(context, 'movie', arguments: movie);
+      },
+      child: tarjeta,
     );
   }
 }

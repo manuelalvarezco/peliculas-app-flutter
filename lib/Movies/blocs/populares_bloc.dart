@@ -19,8 +19,6 @@ class PopularsBlock {
     List<Movie> movies = await popularRepository.fetchPopularsMovies();
     _populares.addAll(movies);
     popularesSink(_populares);
-
-    return movies;
   }
 
   dispose() {
